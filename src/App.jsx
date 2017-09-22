@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import todoList from './todo-list';
 import Header from './components/Header';
 import Todo from './components/Todo';
+import Form from './components/Form';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends React.Component {
 
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleStatusChange(id) {
@@ -33,10 +35,20 @@ class App extends React.Component {
     this.setState({todoList});
   }
 
+  handleAdd(title) {
+    let todoList = this.state.todoList.concat({
+      id: this.state.todoList.length + 1,
+      completed: false,
+      title
+    });
+
+    this.setState({todoList});
+  }
+
   render() {
     return (
       <main>
-        <Header title={this.props.title}/>
+        <Header title={this.props.title} todoList={this.state.todoList} />
         <section className="todo-list">
           {
             this.state.todoList.map(todo =>
@@ -51,6 +63,7 @@ class App extends React.Component {
             )
           }
         </section>
+        <Form onAdd={this.handleAdd} />
       </main>
     );
   }

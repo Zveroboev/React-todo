@@ -11,7 +11,7 @@ function Todo(props) {
 
       <span className="todo-title">{props.title}</span>
 
-      <Button classname="delete icon" icon="delete" onClick={() => props.onDelete(props.id)} />
+      <Button className="delete icon" icon="delete" onClick={() => props.onDelete(props.id)} />
     </div>
   );
 }
