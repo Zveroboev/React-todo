@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import todoList from './todo-list';
 import Header from './components/Header';
+import Stopwatch from './components/Stopwatch';
 import Todo from './components/Todo';
 import Form from './components/Form';
 
@@ -18,6 +19,7 @@ class App extends React.Component {
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleStatusChange(id) {
@@ -45,6 +47,18 @@ class App extends React.Component {
     this.setState({todoList});
   }
 
+  handleEdit(id, title) {
+    let todoList = this.state.todoList.map(todo => {
+      if (todo.id === id) {
+        todo.title = title;
+      }
+
+      return todo;
+    });
+
+    this.setState({todoList});
+  }
+
   render() {
     return (
       <main>
@@ -59,6 +73,7 @@ class App extends React.Component {
                 completed={todo.completed}
                 onStatusChange={this.handleStatusChange}
                 onDelete={this.handleDelete}
+                onEdit={this.handleEdit}
               />
             )
           }
